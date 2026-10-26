@@ -22,12 +22,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r LiveProject/requirements.txt
 
       - name: Run Robot Framework tests
         run: |
           mkdir -p results
-          robot --outputdir results TestCases/
+          robot --outputdir results LiveProject/TestCases/
         continue-on-error: true
 
       - name: Upload Robot Framework reports
