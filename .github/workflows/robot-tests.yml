@@ -23,17 +23,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r LiveProject/requirements.txt
-
+      
+      - name: Check application accessibility
+        run: |
+          curl -I -L --connect-timeout 15 --max-time 30 https://ultimaworks.ltm.com/home
+      
       - name: Run Robot Framework tests
         run: |
           mkdir -p results
           robot --outputdir results LiveProject/TestCases/
         continue-on-error: true
-
+      
       - name: Upload Robot Framework reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: robot-framework-results
           path: results/
-          retention-days: 30
